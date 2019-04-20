@@ -20,13 +20,13 @@ var App = {
     App.fetch(App.stopSpinner);
     
   },
-  
+
   fetch: function(callback = ()=>{}) {
     
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
-
+      console.log(data);// list of obj/messages fromn server
+      console.log(data.results[0].text); // first obj/message text
       callback();
     });
   },
@@ -36,7 +36,6 @@ var App = {
   },
 
   stopSpinner: function() {
-    console.log('stops spinner');
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
   },
@@ -47,7 +46,7 @@ var App = {
   },
   
   addRoom: function() {
-    $('#rooms').append();
+    $('#rooms').find('button').on('click', Rooms.add);
   }    
 
 };

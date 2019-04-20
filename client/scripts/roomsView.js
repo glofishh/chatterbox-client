@@ -1,7 +1,7 @@
 var RoomsView = {
 
   $button: $('#rooms button'),
-  $select: $('select'),
+  $select: $('#rooms select'),
 
   // $button.on('click',),
   // $('#rooms button').
@@ -10,8 +10,12 @@ var RoomsView = {
 
   // var roomTest = 'loft',
   
+  render: function() {
+
+  },
+
   renderRoom: function(roomName) {
-    var roomTag = `<option value="${roomName}">${roomName}</option>`;
+    var roomTag = `<option>${roomName}</option>`;
     this.$select.append(roomTag);
   },
 

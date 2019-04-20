@@ -22,7 +22,6 @@ var Parse = {
 
   readAll: function(successCB, errorCB = null) {
     //gives us the server information
-    console.log(window.CAMPUS);
     $.ajax({
       url: Parse.server,
       type: 'GET',
