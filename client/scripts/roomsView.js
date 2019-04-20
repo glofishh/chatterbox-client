@@ -1,20 +1,21 @@
 var RoomsView = {
 
   $button: $('#rooms button'),
-  $select: $('#rooms select'),
+  $select: $('select'),
 
-  $button.on('click', function() {
-    console.log('HEY YO')
-  });
-
+  // $button.on('click',),
+  // $('#rooms button').
   initialize: function() {
   },
+
+  // var roomTest = 'loft',
   
-  renderRoom: function(room) {
-    var roomTag = `<div class="${room}"></div>`;
-    this.$.append(roomTag);
-  }
+  renderRoom: function(roomName) {
+    var roomTag = `<option value="${roomName}">${roomName}</option>`;
+    this.$select.append(roomTag);
+  },
+
+  // renderRoom(roomTest);
 
   // $button.on('click', this.renderRoom())
-
 };
