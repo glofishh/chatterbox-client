@@ -6,14 +6,20 @@ var FormView = {
     FormView.$form.on('submit', FormView.handleSubmit);
   },
 
+  
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
+    console.log(Messages);
+    console.log(window.location.search);
     event.preventDefault();
-    var $message = {
-      text: $('#message').val(),
-      username: window.location.search.substr(10)
-    };
-    Parse.create($message);
+    Messages.testMessage.text = $('#message').val();
+    Parse.create(Messages.testMessage);
+    Messages.testMessage.text = '';
+    $('#message').val('');
+    MessagesView.initialize();
+
+    // $('#message').html('');
+    // Parse.create();
   },
 
   setStatus: function(active) {
