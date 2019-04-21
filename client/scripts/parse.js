@@ -19,7 +19,7 @@ var Parse = {
       }  
     });
   },
-
+    
   readAll: function(successCB, errorCB = null) {
     //gives us the server information
     $.ajax({

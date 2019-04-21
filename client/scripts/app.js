@@ -27,7 +27,16 @@ var App = {
       // examine the response from the server request:
       console.log(data);// list of obj/messages fromn server
       console.log(data.results[0].text); // first obj/message text
-      callback();
+      
+      for (var i = 0; i < data.results.length; i++) {
+
+        MessagesView.renderMessage(data.results[i]);
+      }
+      
+      
+      
+      
+      callback(data);
     });
   },
   startSpinner: function() {

@@ -15,6 +15,6 @@ var MessagesView = {
         <div class="${message.username}">${message.text}</div>
     </div>`;
     
-    this.$chats.append(htmlTag);
+    this.$chats.text(message.text);
   } 
 };
