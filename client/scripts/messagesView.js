@@ -16,8 +16,8 @@ var MessagesView = {
     // </div>`;
     // for (var i = 0; i < messages.length; i++) {
   
-    var html = MessageView.render(message);
-    console.log(html);
+    // var html = MessageView.render(message);
+    // console.log(html);
 
     console.log(msgTemplate(message));
     this.$chats.append(msgTemplate(message));
