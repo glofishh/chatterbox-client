@@ -3,23 +3,41 @@ var RoomsView = {
   $button: $('#rooms button'),
   $select: $('#rooms select'),
 
-  // $button.on('click',),
-  // $('#rooms button').
   initialize: function() {
+
+    RoomsView.$select.on('change', RoomsView.handleChange);
+    RoomsView.$button.on('click', RoomsView.handleClick);
   },
 
   // var roomTest = 'loft',
   
   render: function() {
 
+    RoomsView.$select.html('');
+    Rooms
+      .items()
+      .each(RoomsView.renderRoom);
+    RoomsView.$select.val(Rooms.selected);
   },
 
-  renderRoom: function(roomName) {
-    var roomTag = `<option>${roomName}</option>`;
-    this.$select.append(roomTag);
+  renderRoom: function(roomname) {
+    var $option = $('<option>').val(roomname).text(roomname);
+    RoomsView.$select.append($option);
   },
 
-  // renderRoom(roomTest);
+  handleChange: function(event) {
+    Rooms.selected = RoomsView.$select.val();
+    MessagesView.render();
+  },
 
-  // $button.on('click', this.renderRoom())
+  handleClick: function(event) {
+    var roomname = prompt('Enter room name');
+    if (roomname) {
+      Rooms.add(roomname, () => {
+        RoomsView.render();
+        MessagesView.render();
+      });
+    }
+  }
+
 };

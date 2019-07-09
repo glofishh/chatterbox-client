@@ -18,26 +18,25 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
+
+    //poll for new messages every 3 seconds
+    setInterval(App.fetch, 3000);
     
   },
 
   fetch: function(callback = ()=>{}) {
     
     Parse.readAll((data) => {
-      // examine the response from the server request:
-      // console.log(data);// list of obj/messages fromn server
-      // console.log(data.results[0].text); // first obj/message text
-      
-      for (var i = 0; i < data.results.length; i++) {
-        MessagesView.renderMessage(data.results[i]);
-      }
-      
-      
-      
-      
+      //dont bother updating if we don't have messages
+      if (!data.results || !data.results.length) { return; }
+
+      Rooms.update(data.results, RoomsView.render);
+      Messages.update(data.results, MessagesView.render);
+
       callback();
     });
   },
+
   startSpinner: function() {
     App.$spinner.show();
     FormView.setStatus(true);
@@ -46,16 +45,6 @@ var App = {
   stopSpinner: function() {
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
-  },
-
-
-  addFriend: function() {
-    $('.username').on('click', Friends.toggleStatus());
-  },
-  
-  addRoom: function() {
-    $('#rooms').find('button').on('click', Rooms.add);
-  }    
-
+  }
 };
 

@@ -3,33 +3,27 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
-    // this.$chats.append(this.renderMessage)
+    MessagesView.$chats.on('click', '.username', MessagesView.handleClick);
   },
 
-  renderMessage: function (message) { 
-    // var htmlTag = `
-    // <div class="chat">
-    //   <div id="messageNames">
-    //     <button type="button" id="${message.username}">${message.username}:</button>
-    //   </div>
-    //     <div class="${message.username}">${message.text}</div>
-    // </div>`;
-    // for (var i = 0; i < messages.length; i++) {
-  
-    // var html = MessageView.render(message);
-    // console.log(html);
+  render: function() { 
+    MessagesView.$chats.html('');
+    Messages
+      .items()
+      .filter(message => Rooms.isSelected(message.roomname))
+      .each(message => MessagesView.renderMessage(message));
+  },
 
-    console.log(msgTemplate(message));
-    this.$chats.append(msgTemplate(message));
+  renderMessage: function(message) {
+    var $message = MessageView.render(message);
+    MessagesView.$chats.prepend($message);
+  },
+
+  handleClick: function(event) {
+    //get username from data attribute
+    var username = $(event.target).data('username');
+    if (username === undefined) { return; }
+
+    Friends.toggleStatus(username, MessagesView.render);
   }
 };
-
-
-var msgTemplate = _.template(
-  `<div class ="message">
-    <div class ="username">
-      <%- username%>
-    </div>
-    <%- text%>
-  </div>`
-);
